@@ -37,13 +37,11 @@ def lambda_handler(event, context):
     # Create OS agnostic source path
     if "\\" in source_path:
         sos = 'w' # source os is windows
-        list_files_cmd = "dir " + source_path + " /b /a-d /o:gn"
         orig_source_path = source_path
         source_path = str(PureWindowsPath(source_path)).replace("\\","/")
         print(orig_source_path)
     else:
         sos = 'l' # source os is linux based
-        list_files_cmd = "find " + source_path + " -maxdepth 1 -type f -not -path '*/\.*'"
         source_path = str(Path(source_path))
 
     print(source_path)
